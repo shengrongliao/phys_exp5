@@ -11,11 +11,11 @@ def single_voigt_with_baseline(x, amplitude, center, sigma, gamma, a0, a1, a2=0)
     return voigt + baseline
 
 # 讀取數據
-files = listdir('.\拆分數據')
+files = listdir('.\data')
 
 def preduce_figure(file):
     # Load data
-    data = np.loadtxt(f".\拆分數據\{file}")
+    data = np.loadtxt(f".\data\{file}")
     x_data = data[:, 0]
     y_data = data[:, 1]
 

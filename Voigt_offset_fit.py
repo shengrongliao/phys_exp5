@@ -9,10 +9,10 @@ def voigt(x, amplitude, center, sigma, gamma, offset):
     return amplitude * voigt_profile(x - center, sigma, gamma) + offset
 
 # 讀取數據
-files = listdir('.\拆分數據')
+files = listdir('.\data')
 
 def preduce_figure(file):
-    data = np.loadtxt(f".\拆分數據\{file}")
+    data = np.loadtxt(f".\data\{file}")
     x_data = data[:, 0]
     y_data = data[:, 1]
     # 使用 curve_fit 進行 Voigt 分布擬合

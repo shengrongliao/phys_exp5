@@ -12,11 +12,11 @@ def double_voigt_with_baseline(x, amp1, cen1, sigma1, gamma1, amp2, cen2, sigma2
     return voigt1 + voigt2 + baseline
 
 # 讀取數據
-files = listdir('.\拆分數據')
+files = listdir('.\data')
 
 def preduce_figure(file):
     # Load data
-    data = np.loadtxt(f".\拆分數據\{file}")
+    data = np.loadtxt(f".\data\{file}")
     x_data = data[:, 0]
     y_data = data[:, 1]
 
