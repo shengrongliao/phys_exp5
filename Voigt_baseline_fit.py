@@ -54,10 +54,10 @@ def preduce_figure(file):
 
     # Plotting
     plt.figure()
-    plt.plot(x_data, y_data, 'b-', label='Data')
-    plt.plot(x_data, single_voigt_with_baseline(x_data, *params), 'r--', label=f'Baseline_Fit, R^2={r_squared:.3f}')
-    plt.xlabel('X')
-    plt.ylabel('Y')
+    plt.plot(x_data, y_data, 'x', label='Data')
+    plt.plot(np.linspace(max(x_data), min(x_data), 100), single_voigt_with_baseline(np.linspace(max(x_data), min(x_data), 100), *params), 'r--', label=f'fitting_curve, R^2={r_squared:.3f}')
+    plt.xlabel('theta (degree)')
+    plt.ylabel('eff amp')
     plt.legend()
     plt.title(file)
     plt.savefig(f'./image/baseline/{file}.png')

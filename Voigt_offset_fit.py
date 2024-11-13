@@ -16,7 +16,7 @@ def preduce_figure(file):
     x_data = data[:, 0]
     y_data = data[:, 1]
     # 使用 curve_fit 進行 Voigt 分布擬合
-    initial_guess = [max(y_data), np.mean(x_data), np.std(x_data), np.std(x_data) / 2, 0]  # 初始猜測值：amplitude, center, sigma, gamma
+    initial_guess = [max(y_data), np.mean(x_data), np.std(x_data), np.std(x_data) / 2, 1]  # 初始猜測值：amplitude, center, sigma, gamma
     params, covariance = curve_fit(voigt, x_data, y_data, p0=initial_guess, maxfev = 10000000)
 
     # 擬合參數
@@ -35,9 +35,9 @@ def preduce_figure(file):
     # 繪圖
     plt.figure()
     plt.plot(x_data, y_data, 'x', label='data')
-    plt.plot(x_data, voigt(x_data, *params), 'r--', label=f'fitting_curve, R^2={r_squared:.3f}')
-    plt.xlabel('X')
-    plt.ylabel('Y')
+    plt.plot(np.linspace(max(x_data), min(x_data), 100), voigt(np.linspace(max(x_data), min(x_data), 100), *params), 'r--', label=f'fitting_curve, R^2={r_squared:.3f}')
+    plt.xlabel('theta (degree)')
+    plt.ylabel('eff amp')
     plt.legend()
     plt.title(file)
     plt.savefig(f'./image/offset/{file}.png')

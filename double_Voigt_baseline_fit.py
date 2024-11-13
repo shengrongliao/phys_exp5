@@ -22,8 +22,8 @@ def preduce_figure(file):
 
     # Initial guesses (add a linear baseline a0 and a1, and optional a2 for quadratic)
     initial_guess = [
-        max(y_data), np.mean(x_data) - np.std(x_data)*1.5, np.std(x_data), np.std(x_data) / 2,  # First Voigt
-        max(y_data) / 2, np.mean(x_data) + np.std(x_data)*1.5, np.std(x_data), np.std(x_data) / 2,  # Second Voigt
+        max(y_data), np.mean(x_data) - np.std(x_data)*0.5, np.std(x_data), np.std(x_data) / 2,  # First Voigt
+        max(y_data) / 2, np.mean(x_data) + np.std(x_data)*0.5, np.std(x_data), np.std(x_data) / 2,  # Second Voigt
         min(y_data), 0, 0  # Linear and optional quadratic baseline terms
     ]
 
@@ -58,10 +58,10 @@ def preduce_figure(file):
 
     # Plotting
     plt.figure()
-    plt.plot(x_data, y_data, 'b-', label='Data')
-    plt.plot(x_data, double_voigt_with_baseline(x_data, *params), 'r--', label='Double Voigt with Baseline Fit')
-    plt.xlabel('X')
-    plt.ylabel('Y')
+    plt.plot(x_data, y_data, 'x', label='Data')
+    plt.plot(np.linspace(max(x_data), min(x_data), 100), double_voigt_with_baseline(np.linspace(max(x_data), min(x_data), 100), *params), 'r--', label=f'fitting_curve, R^2={r_squared:.3f}')
+    plt.xlabel('theta (degree)')
+    plt.ylabel('eff amp')
     plt.legend()
     plt.title(file)
     plt.savefig(f'./image/two_Voigt_with_baseline/{file}.png')
