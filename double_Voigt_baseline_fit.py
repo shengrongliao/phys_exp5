@@ -8,7 +8,7 @@ from os import listdir
 def double_voigt_with_baseline(x, amp1, cen1, sigma1, gamma1, amp2, cen2, sigma2, gamma2, a0, a1, a2=0):
     voigt1 = amp1 * voigt_profile(x - cen1, sigma1, gamma1)
     voigt2 = amp2 * voigt_profile(x - cen2, sigma2, gamma2)
-    baseline = a0 + a1 * x + a2 * x**2
+    baseline = a0 + a1 * x #+ a2 * x**2
     return voigt1 + voigt2 + baseline
 
 # 讀取數據
@@ -34,7 +34,7 @@ def preduce_figure(file):
     )
 
     try:
-        params, covariance = curve_fit(double_voigt_with_baseline, x_data, y_data, p0=initial_guess, bounds=bounds)
+        params, covariance = curve_fit(double_voigt_with_baseline, x_data, y_data, p0=initial_guess, bounds=bounds, maxfev = 10000000)
     except ValueError as e:
         print(f"Error fitting {file}: {e}")
         return

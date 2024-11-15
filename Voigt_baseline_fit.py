@@ -7,7 +7,7 @@ from os import listdir
 # Define a single Voigt model with a polynomial baseline
 def single_voigt_with_baseline(x, amplitude, center, sigma, gamma, a0, a1, a2=0):
     voigt = amplitude * voigt_profile(x - center, sigma, gamma)
-    baseline = a0 + a1 * x + a2 * x**2  # Linear + optional quadratic term for flexibility
+    baseline = a0 + a1 * x # + a2 * x**2  # Linear + optional quadratic term for flexibility
     return voigt + baseline
 
 # 讀取數據
